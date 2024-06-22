@@ -3,4 +3,4 @@
 
 # Ignore Python bytecode files
 *.pyc
-*__/pycache__/
+**/__/pycache__/
