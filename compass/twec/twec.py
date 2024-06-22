@@ -14,19 +14,19 @@ class TWEC:
     """
     Handles alignment between multiple slices of temporal text
     """
-    def __init__(self, size=100, sg=0, siter=5, diter=5, ns=10, window=5, alpha=0.025,
-                            min_count=5, workers=2, test = "test", opath="model", init_mode="hidden"):
+    def __init__(self, size=100, sg=0, siter=5, diter=5, ns=5, window=5, alpha=0.025,
+                            min_count=5, workers=3, test="test", opath="model", init_mode="hidden"):
         """
 
         :param size: Number of dimensions. Default is 100.
         :param sg: Neural architecture of Word2vec. Default is CBOW (). If 1, Skip-gram is employed.
         :param siter: Number of static iterations (epochs). Default is 5.
         :param diter: Number of dynamic iterations (epochs). Default is 5.
-        :param ns: Number of negative sampling examples. Default is 10, min is 1.
+        :param ns: Number of negative sampling examples. Default is 5, min is 1.
         :param window: Size of the context window (left and right). Default is 5 (5 left + 5 right).
         :param alpha: Initial learning rate. Default is 0.025.
         :param min_count: Min frequency for words over the entire corpus. Default is 5.
-        :param workers: Number of worker threads. Default is 2.
+        :param workers: Number of worker threads. Default is 3.
         :param test: Folder name of the diachronic corpus files for testing.
         :param opath: Name of the desired output folder. Default is model.
         :param init_mode: If \"hidden\" (default), initialize temporal models with hidden embeddings of the context;'
