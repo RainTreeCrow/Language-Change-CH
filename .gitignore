@@ -1,0 +1,6 @@
+# Ignore all .npy files
+*.npy
+
+# Ignore Python bytecode files
+*.pyc
+__/pycache__/
