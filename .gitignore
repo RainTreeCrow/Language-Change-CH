@@ -3,3 +3,6 @@
 
 # Ignore Python bytecode files
 *.pyc
+
+# Ignore log files
+log.txt
