@@ -1,6 +1,9 @@
 # Ignore all .npy files
 *.npy
 
+# Ignore all .model files
+*.model
+
 # Ignore Python bytecode files
 *.pyc
 
