@@ -1,7 +1,7 @@
 import os
 import logging
 import numpy as np
-from gensim.models.word2vec import Word2Vec, LineSentence
+from gensim.models.word2vec import Word2Vec, LineSentence, Vocab
 
 
 def intersection(m1, m2, words=None):
@@ -17,8 +17,8 @@ def intersection(m1, m2, words=None):
 	"""
 
 	# Get the vocab for each model
-	vocab_m1 = set(m1.vocab.keys())
-	vocab_m2 = set(m2.vocab.keys())
+	vocab_m1 = set(m1.wv.vocab.keys())
+	vocab_m2 = set(m2.wv.vocab.keys())
 
 	# Find the common vocabulary
 	common_vocab = vocab_m1 & vocab_m2
@@ -31,24 +31,24 @@ def intersection(m1, m2, words=None):
 
 	# Otherwise sort by frequency (summed for both)
 	common_vocab = list(common_vocab)
-	common_vocab.sort(key=lambda w: m1.vocab[w].count + m2.vocab[w].count, reverse=True)
+	common_vocab.sort(key=lambda w: m1.wv.vocab[w].count + m2.wv.vocab[w].count, reverse=True)
 
 	# Then for each model...
 	for m in [m1, m2]:
 		# Replace old syn0norm array with new one (with common vocab)
-		indices = [m.vocab[w].index for w in common_vocab]
-		old_arr = m.syn0norm
+		indices = [m.wv.vocab[w].index for w in common_vocab]
+		old_arr = m.wv.syn0norm
 		new_arr = np.array([old_arr[index] for index in indices])
-		m.syn0norm = m.syn0 = new_arr
+		m.wv.syn0norm = m.wv.syn0 = new_arr
 
 		# Replace old vocab dictionary and old index2word with new one (common vocab)
-		m.index2word = common_vocab
-		old_vocab = m.vocab
+		m.wv.index2word = common_vocab
+		old_vocab = m.wv.vocab
 		new_vocab = {}
 		for new_index, word in enumerate(common_vocab):
 			old_vocab_obj = old_vocab[word]
-			new_vocab[word] = gensim.models.word2vec.Vocab(index=new_index, count=old_vocab_obj.count)
-		m.vocab = new_vocab
+			new_vocab[word] = Vocab(index=new_index, count=old_vocab_obj.count)
+		m.wv.vocab = new_vocab
 
 	return (m1, m2)
 
@@ -73,8 +73,8 @@ def procrustes_align(base_embed, other_embed, words=None):
 	in_base_embed, in_other_embed = intersection(base_embed, other_embed, words=words)
 
 	# get the embedding matrices
-	base_vecs = in_base_embed.syn0norm
-	other_vecs = in_other_embed.syn0norm
+	base_vecs = in_base_embed.wv.syn0norm
+	other_vecs = in_other_embed.wv.syn0norm
 
 	# just a matrix dot product with numpy
 	m = other_vecs.T.dot(base_vecs)
@@ -84,7 +84,7 @@ def procrustes_align(base_embed, other_embed, words=None):
 	ortho = u.dot(v)
 	# Replace original array with modified one
 	# i.e. multiplying the embedding matrix (syn0norm)by "ortho"
-	other_embed.syn0norm = other_embed.syn0 = (other_embed.syn0norm).dot(ortho)
+	other_embed.wv.syn0norm = other_embed.wv.syn0 = (other_embed.wv.syn0norm).dot(ortho)
 	return other_embed
 
 
@@ -104,3 +104,5 @@ def train_aligned(text, base_embed=None, opath='model',
 		embed = procrustes_align(base_embed, embed)
 	model_name = os.path.splitext(os.path.basename(text))[0]
 	embed.save(os.path.join(opath, model_name + ".model"))
+
+	return embed
