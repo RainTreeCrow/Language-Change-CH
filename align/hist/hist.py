@@ -90,6 +90,21 @@ def procrustes_align(base_embed, other_embed, words=None):
 
 def train_aligned(text, base_embed=None, opath='model',
 		size=100, sg=1, it=5, ns=5, window=5, alpha=0.025, min_count=5, workers=3):
+	"""
+	:param opath: Name of the desired output folder. Default is model.
+	:param size: Number of dimensions. Default is 100.
+	:param sg: Neural architecture of Word2vec. Default is CBOW (). If 1, Skip-gram is employed.
+	:param it: Number of iterations (epochs). Default is 5.
+	:param ns: Number of negative sampling examples. Default is 5, min is 1.
+	:param window: Size of the context window (left and right). Default is 5 (5 left + 5 right).
+	:param alpha: Initial learning rate. Default is 0.025.
+	:param min_count: Min frequency for words over the entire corpus. Default is 5.
+	:param workers: Number of worker threads. Default is 3.
+
+	If base_embed is not provided, simply train the embedding;
+	If provided, train and align.
+	"""
+
 	if not os.path.isdir(opath):
 		os.makedirs(opath)
 	with open(os.path.join(opath, "log.txt"), "w") as f_log:
@@ -97,12 +112,14 @@ def train_aligned(text, base_embed=None, opath='model',
 		f_log.write('\n')
 		logging.basicConfig(filename=os.path.realpath(f_log.name),
 			format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
 	sentences = LineSentence(text)
 	embed = Word2Vec(sentences, sg=sg, size=size, alpha=alpha, iter=it,
 		negative=ns, window=window, min_count=min_count, workers=workers)
+
 	if base_embed is not None:
 		embed = procrustes_align(base_embed, embed)
 	model_name = os.path.splitext(os.path.basename(text))[0]
-	embed.save(os.path.join(opath, model_name + ".model"))
 
+	embed.save(os.path.join(opath, model_name + ".model"))
 	return embed
