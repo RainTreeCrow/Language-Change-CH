@@ -106,7 +106,7 @@ class TWEC:
             self.compass = Word2Vec.load(os.path.join(self.opath, "compass.model"))
             print("Compass loaded from file.")
         else:
-            sentences = LineSentences(compass_text)
+            sentences = LineSentence(compass_text)
             print("Training the compass.")
             if compass_exists:
                 print("Compass will be overwritten after training")
