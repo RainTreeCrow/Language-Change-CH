@@ -9,3 +9,6 @@
 
 # Ignore log files
 log.txt
+
+# Ignore .xlsx files
+*.xlsx
