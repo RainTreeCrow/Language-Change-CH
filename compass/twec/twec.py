@@ -80,7 +80,7 @@ class TWEC:
         :param word:
         :return:
         """
-        if word in self.gvocab:
+        if word in self.gvocab and count >= min_count:
             return utils.RULE_KEEP
         else:
             return utils.RULE_DISCARD
