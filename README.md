@@ -2,7 +2,7 @@
 
 #### Project Overview
 
-Our work employed Word2Vec-based temporal word embeddings, designed both static and temporal tests to train and evaluate two alignment methods on *People’s Daily* news data from 1946 to 2023. We selected a model with balanced performance across tasks for heuristic analysis and exploration, filtered a list of words with potential semantic changes for manual annotation and classification, and used temporal analogy queries to capture real-world events, demonstrating a potential application of temporal word embeddings in sociology and current affairs.
+Our work employed Word2Vec-based temporal word embeddings, designed static and temporal tests to train and evaluate two alignment methods on *People’s Daily* news data from 1946 to 2023. We selected a model with balanced performance across tasks for heuristic analysis and exploration, filtered a list of words with potential semantic changes for manual annotation and classification, and used temporal analogy queries to capture real-world events, demonstrating a potential application of temporal word embeddings in sociology and current affairs.
 
 #### Code Structure
 
