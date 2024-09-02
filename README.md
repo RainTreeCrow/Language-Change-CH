@@ -2,7 +2,7 @@
 
 #### Project Overview
 
-Our work employed a Word2Vec-based temporal word embedding model, designed both static and temporal tests to train and evaluate two alignment methods on *People’s Daily* news data from 1946 to 2023. We selected a model with balanced performance across tasks for further heuristic analysis and exploration, filtered a list of words with potential semantic changes for manual annotation and classification, and used temporal analogy queries to capture real-world events, demonstrating a potential application of temporal word embeddings in sociology and current affairs.
+Our work employed Word2Vec-based temporal word embeddings, designed both static and temporal tests to train and evaluate two alignment methods on *People’s Daily* news data from 1946 to 2023. We selected a model with balanced performance across tasks for heuristic analysis and exploration, filtered a list of words with potential semantic changes for manual annotation and classification, and used temporal analogy queries to capture real-world events, demonstrating a potential application of temporal word embeddings in sociology and current affairs.
 
 #### Code Structure
 
@@ -154,7 +154,7 @@ python -m venv virtual
 ```
 Activate the virtual environment
 ```bash
-.\venv\Scripts\activate
+.\virtual\Scripts\activate
 ```
 Install dependencies
 ```bash
@@ -163,13 +163,13 @@ pip install -r requirements.txt
 
 #### Mini Example
 
-Run `example.ipynb` in the `alignment/example` and `compass/example` directories to train the two models on the mini English test set `training`.
+Run `example.ipynb` in the `alignment/example` and `compass/example` directories to try out the two models on a mini English corpora (using the trial data presented under the `training` folder).
 
 #### Corpus Download
 
 1. Download the `.jsonl` file from [Hugging Face](https://huggingface.co/datasets/Papersnake/people_daily_news) and place it in the `corpus/raw` directory.
 
-2. Download and extract the `.7z` file from [GitHub](https://github.com/caspiankexin/people-daily-crawler-date/releases/download/1946-2003/1970-1979.7z). Extract the folder for January 1970, place it in the `corpus` directory, and rename the folder to `jan-1971`.
+2. Download and extract the `.7z` file from [GitHub](https://github.com/caspiankexin/people-daily-crawler-date/releases/download/1946-2003/1970-1979.7z). Extract the folder `1971年\1971年01月`, place it in the `corpus` directory, and rename the folder to `jan-1971`. This is to complete the missing data.
 
 #### Preprocessing
 
@@ -179,11 +179,11 @@ Run `example.ipynb` in the `alignment/example` and `compass/example` directories
 
 #### Run the Models
 
-Run `train.ipynb` in the `1-year`, `2-slices`, and `5-year` subfolders under the `alignment` and `compass` directories to train the corresponding models on the respective time slices.
+Run `train.ipynb` in the `1-year`, `2-slices` (1954-1978 vs 1979-2003), and `5-year` subfolders under the `alignment` and `compass` directories to train the corresponding models on the respective time slices.
 
 #### Evaluation
 
-1. Run `evaluation.ipynb` in the `static` subfolder under the `evaluation` directory to perform synchronic word similarity and word analogy tests.
+1. Run `evaluation.ipynb` in the `static` subfolder under the `evaluation` directory to perform the synchronic word similarity (word relatedness) test and word analogy test.
 2. Run `evaluation.ipynb` in the `change` subfolder to conduct diachronic word similarity tests.
 3. Run `evaluation.ipynb` in the `analogy` subfolder to carry out temporal word analogy tests.
 
@@ -193,7 +193,7 @@ Run `train.ipynb` in the `1-year`, `2-slices`, and `5-year` subfolders under the
 2. Run `analogy.ipynb` in the `explore/analogy` directory to perform additional temporal analogy queries.
 3. Run `visualisation.ipynb` in the `explore/visualisation` directory to plot the change trajectories.
 
-### Customization
+#### Customization
 
 Feel free to adjust the corpus or modify the test examples according to your specific needs.
 
