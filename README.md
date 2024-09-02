@@ -167,9 +167,9 @@ Run `example.ipynb` in the `alignment/example` and `compass/example` directories
 
 #### Corpus Download
 
-1. Download the `.jsonl` file from [Hugging Face](https://huggingface.co/datasets/Papersnake/people_daily_news) and place it in the `corpus/raw` directory.
+1. Download the `.jsonl` files from [Hugging Face](https://huggingface.co/datasets/Papersnake/people_daily_news) and place them in the `corpus/raw` directory.
 
-2. Download and extract the `.7z` file from [GitHub](https://github.com/caspiankexin/people-daily-crawler-date/releases/download/1946-2003/1970-1979.7z). Extract the folder `1971年\1971年01月`, place it in the `corpus` directory, and rename the folder to `jan-1971`. This is to complete the missing data.
+2. Download and extract the `.7z` file from [GitHub](https://github.com/caspiankexin/people-daily-crawler-date/releases/download/1946-2003/1970-1979.7z). Extract the folder `1971年/1971年01月`, place it in the `corpus` directory, and rename the folder to `jan-1971`. This is to complete the missing data.
 
 #### Preprocessing
 
@@ -189,7 +189,7 @@ Run `train.ipynb` in the `1-year`, `2-slices` (1954-1978 vs 1979-2003), and `5-y
 
 #### Explore
 
-1. Run `distance.ipynb` and `statistics.ipynb` in the `explore/mining` directory to perform semantic change detection and to conduct data statistics on the manually annotated results.
+1. Run `distance.ipynb` and `statistics.ipynb` in the `explore/mining` directory to perform semantic change detection and to conduct statistical analysis on the manually annotated results.
 2. Run `analogy.ipynb` in the `explore/analogy` directory to perform additional temporal analogy queries.
 3. Run `visualisation.ipynb` in the `explore/visualisation` directory to plot the change trajectories.
 
@@ -202,11 +202,3 @@ Feel free to adjust the corpus or modify the test examples according to your spe
 Author: Hanzhi Zhang
 
 Email: hanzhizhang1007@gmail.com
-
-
-
-
-
-
-
-
