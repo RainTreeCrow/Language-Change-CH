@@ -1,3 +1,11 @@
+### Analysing Lexical Semantic Change in Chinese Language Using Word Embeddings
+
+#### Project Overview
+
+Our work employed a Word2Vec-based temporal word embedding model, designed both static and temporal tests to train and evaluate two alignment methods on *People’s Daily* news data from 1946 to 2023. We selected a model with balanced performance across tasks for further heuristic analysis and exploration, filtered a list of words with potential semantic changes for manual annotation and classification, and used temporal analogy queries to capture real-world events, demonstrating a potential application of temporal word embeddings in sociology and current affairs.
+
+#### Code Structure
+
 <pre><code>Language-Change-CH/
 ├── alignment/ <i>(training the alignment-based temporal embeddings)</i>
 │   ├── 1-year/ <i>(1-year time slices)</i>
@@ -13,7 +21,9 @@
 │   │   └── <b>example.ipynb</b>
 │   └── hist/ <i>(source code for alignment-based model)</i>
 │       └── hist.py
+│
 ├── bert/ <i>(still under construction, ignore for now)</i>
+│
 ├── compass/ <i>(training the compass-based temporal embeddings)</i>
 │   ├── 1-year/ <i>(1-year time slices)</i>
 │   │   └── <b>train.ipynb</b>
@@ -29,6 +39,7 @@
 │   │   └── <b>example.ipynb</b>
 │   └── twec/ <i>(source code for compass-based model)</i>
 │       └── twec.py
+│
 ├── <del> corpus/</del>
 │   ├── <del> 1-year/</del> <i>(tokenised 1946.txt ~ 2023.txt)</i>
 │   ├── <del> 2-slices/</del> <i>(tokenised 2-slices)</i>
@@ -49,6 +60,7 @@
 │   ├── <del> vocab_filter.txt</del> <i>(words with count > 100 on 5-year)</i>
 │   ├── <del> vocab_nonch.txt</del> <i>(none-Chinese words)</i>
 │   └── <del> word_count.txt</del> <i>(total word count each year)</i>
+│
 ├── evaluation/ <i>(evalutaion tasks)</i>
 │   ├── analogy/ <i>(temporal word analogy)</i>
 │   │   ├── facts/ <i>(list national leaders' names)</i>
@@ -78,6 +90,7 @@
 │       ├── correlation.csv <i>(sim scores vs year/word count)</i>
 │       ├── <b>evaluation.ipynb</b>
 │       └── static_eval.csv <i>(word sim/word analogy scores)</i>
+│
 ├── explore/
 │   ├── analogy/ <i>(more temporal analogies)</i>
 │   │   ├── analogy_words/ <i>(analogy query results)</i>
@@ -103,6 +116,7 @@
 │   └── visualisation/ <i>(visualisation of words' change path)</i>
 │       ├── change_path/ <i>(visualised paths)</i>
 │       └── <b>visualisation.ipynb</b>
+│
 ├── preprocess/ <i>(corpus preprocessing)</i>
 │   ├── raw_stats/ <i>(stats about raw news data)</i>
 │   │   ├── raw_stats.csv
@@ -117,5 +131,82 @@
 │   │   └── word_count.png
 │   ├── <b>mrg_slice.ipynb</b> <i>(merge 1-year to 5-year and 2-slices)</i>
 │   └── <b>statistics.ipynb</b> <i>(stats about tokenised words)</i>
+│
 ├── .gitignore
-└── README.md<code></pre>
+├── README.md
+└── requirements.txt</code></pre>
+
+Large files such as model.npy, .model, and the corpus have not been uploaded.
+
+#### Installation and Setup
+
+Clone the repository
+```bash
+git clone https://github.com/RainTreeCrow/Language-Change-CH.git
+```
+Navigate to the project directory
+```bash
+cd Language-Change-CH
+```
+Create a virtual environment
+```bash
+python -m venv virtual
+```
+Activate the virtual environment
+```bash
+.\venv\Scripts\activate
+```
+Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+#### Mini Example
+
+Run `example.ipynb` in the `alignment/example` and `compass/example` directories to train the two models on the mini English test set `training`.
+
+#### Corpus Download
+
+1. Download the `.jsonl` file from [Hugging Face](https://huggingface.co/datasets/Papersnake/people_daily_news) and place it in the `corpus/raw` directory.
+
+2. Download and extract the `.7z` file from [GitHub](https://github.com/caspiankexin/people-daily-crawler-date/releases/download/1946-2003/1970-1979.7z). Extract the folder for January 1970, place it in the `corpus` directory, and rename the folder to `jan-1971`.
+
+#### Preprocessing
+
+1. Run `sentence/sent_split.ipynb` in the `preprocess` directory to split sentences in the raw corpus.
+2. Run `tokenizer/tokenize.ipynb` to perform word tokenization.
+3. Run `mrg_slice.ipynb` to merge 1-year time slices into 5-year and 2-slices.
+
+#### Run the Models
+
+Run `train.ipynb` in the `1-year`, `2-slices`, and `5-year` subfolders under the `alignment` and `compass` directories to train the corresponding models on the respective time slices.
+
+#### Evaluation
+
+1. Run `evaluation.ipynb` in the `static` subfolder under the `evaluation` directory to perform synchronic word similarity and word analogy tests.
+2. Run `evaluation.ipynb` in the `change` subfolder to conduct diachronic word similarity tests.
+3. Run `evaluation.ipynb` in the `analogy` subfolder to carry out temporal word analogy tests.
+
+#### Explore
+
+1. Run `distance.ipynb` and `statistics.ipynb` in the `explore/mining` directory to perform semantic change detection and to conduct data statistics on the manually annotated results.
+2. Run `analogy.ipynb` in the `explore/analogy` directory to perform additional temporal analogy queries.
+3. Run `visualisation.ipynb` in the `explore/visualisation` directory to plot the change trajectories.
+
+### Customization
+
+Feel free to adjust the corpus or modify the test examples according to your specific needs.
+
+#### Contact
+
+Author: Hanzhi Zhang
+
+Email: hanzhizhang1007@gmail.com
+
+
+
+
+
+
+
+
