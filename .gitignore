@@ -12,6 +12,3 @@ log.txt
 
 # Ignore .xlsx files
 *.xlsx
-
-# Ignore .rar files
-*.rar
