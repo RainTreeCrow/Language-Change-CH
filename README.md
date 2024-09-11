@@ -4,6 +4,8 @@
 
 Our work employed Word2Vec-based temporal word embeddings, designed static and temporal tests to train and evaluate two alignment methods on *People’s Daily* news corpus (1946-2023). We selected a model with balanced performance across tasks for heuristic analysis and exploration, filtered a list of words with potential semantic changes for manual annotation and classification, and used temporal analogy queries to capture real-world events, demonstrating a potential application of temporal word embeddings in sociology and current affairs.
 
+Dissertation report can be found in [my master's course project archive](https://github.com/RainTreeCrow/Warwick-MSc-CS/blob/main/907%20Dissertation/Dissertation/Dissertation_Report.pdf).
+
 #### Code Structure
 
 <pre><code>Language-Change-CH/
